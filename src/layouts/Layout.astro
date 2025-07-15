@@ -1,0 +1,149 @@
+---
+import "../styles/global.css";
+
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "claim.cafe",
+  description = "Een warm plekje voor je juridische vragen",
+} = Astro.props;
+
+const year = new Date().getFullYear();
+---
+
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- SEO & Social -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="nl_NL" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  </head>
+
+  <body class="font-sans text-base">
+    <!-- Header -->
+    <header
+      class="sticky top-0 z-50 bg-[var(--color-beige)] bg-opacity-80 backdrop-blur-sm
+             dark:bg-[var(--color-blue-950)] dark:bg-opacity-80
+             border-b border-blue-200 dark:border-blue-800"
+    >
+      <div class="max-w-3xl mx-auto flex justify-between items-center px-4 py-3">
+        <!-- Logo / Home -->
+        <a href="/" class="text-xl font-bold font-futura">claim.cafe</a>
+
+        <!-- Desktop nav -->
+        <nav class="hidden sm:flex items-center space-x-6 text-sm">
+          <a href="/ask" class="hover:underline">Stel je vraag</a>
+          <a href="/blog" class="hover:underline">Verhalen</a>
+          <a href="mailto:hallo@claim.cafe" class="hover:underline">Doe mee</a>
+          <button
+            id="theme-toggle"
+            class="underline hover:text-blue-600 dark:hover:text-yellow-300"
+            aria-label="Wissel thema"
+          >
+            ☀️/🌙
+          </button>
+        </nav>
+
+        <!-- Mobile menu button -->
+        <button
+          id="mobile-menu-toggle"
+          class="sm:hidden text-2xl leading-none"
+          aria-label="Open menu"
+        >
+          ☰
+        </button>
+      </div>
+
+      <!-- Mobile nav (initially hidden) -->
+      <nav id="mobile-menu" class="sm:hidden hidden px-4 pb-4 space-y-2 text-sm">
+        <a href="/ask" class="block hover:underline">Stel je vraag</a>
+        <a href="/blog" class="block hover:underline">Verhalen</a>
+        <a href="mailto:hallo@claim.cafe" class="block hover:underline">Doe mee</a>
+        <button
+          id="theme-toggle-mobile"
+          class="block underline hover:text-blue-600 dark:hover:text-yellow-300"
+          aria-label="Wissel thema"
+        >
+          ☀️/🌙
+        </button>
+      </nav>
+    </header>
+
+    <!-- Main content -->
+    <main
+      class="max-w-3xl mx-auto px-4 py-8
+             bg-[var(--color-beige)] dark:bg-[var(--color-blue-950)]
+             text-[var(--color-blue-900)] dark:text-[var(--color-beige)]"
+    >
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="py-6 mt-12
+             bg-[var(--color-blue-800)] text-[var(--color-beige)] text-sm
+             dark:bg-[var(--color-blue-950)]"
+    >
+      <div class="max-w-3xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0">
+        <p>© {year} claim.cafe — Iedereen verdient inzicht.</p>
+        <nav class="space-x-4">
+          <a href="/privacy" class="hover:underline">Privacy</a>
+          <a href="/contact" class="hover:underline">Contact</a>
+        </nav>
+      </div>
+    </footer>
+
+    <!-- Theme & Mobile Menu Scripts -->
+    <script>
+      const root = document.documentElement;
+      const themeButtons = document.querySelectorAll('#theme-toggle, #theme-toggle-mobile');
+      const mobileToggle = document.getElementById('mobile-menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      // Initialize theme from localStorage or system
+      if (
+        localStorage.theme === 'dark' ||
+        (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+      ) {
+        root.classList.add('dark');
+      }
+
+      themeButtons.forEach((btn) =>
+        btn.addEventListener('click', () => {
+          root.classList.toggle('dark');
+          localStorage.theme = root.classList.contains('dark') ? 'dark' : 'light';
+        })
+      );
+
+      // Toggle mobile menu visibility
+      mobileToggle?.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+    </script>
+  </body>
+</html>

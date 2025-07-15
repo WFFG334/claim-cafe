@@ -1,0 +1,53 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+
+// Voor nette datumweergave
+const formatter = new Intl.DateTimeFormat('nl-NL', { dateStyle: 'long' });
+const formattedDate = formatter.format(new Date(post.data.pubDate));
+
+// SEO metadata
+const title = post.data.title;
+const description = post.data.description ?? post.body?.slice(0, 160).replace(/\n/g, ' ') + '…';
+const url = `https://claim.cafe/blog/${post.slug}`;
+---
+
+<html lang="nl">
+  <head>
+    <title>{title} | claim.cafe</title>
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={url} />
+    <meta property="og:site_name" content="claim.cafe" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+  </head>
+
+  <body>
+    <Layout>
+      <article class="prose prose-lg max-w-2xl mx-auto text-gray-900">
+        <h1 class="text-4xl font-bold mb-2 text-blue-800">{title}</h1>
+        <p class="text-sm text-gray-500 mb-8">Gepubliceerd op {formattedDate}</p>
+        <div set:html={post.body} />
+      </article>
+    </Layout>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+/* 1) Tailwind v4 single import */
+@import "tailwindcss";
+
+/* 2) Custom font-face for Futura */
+@font-face {
+  font-family: 'Futura PT';
+  src: url('/fonts/futura-bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 3) CSS variables for your colors */
+:root {
+  --color-beige: #f5f2ec;
+  --color-blue-900: #1e293b;
+  --color-blue-950: #0f172a;
+}
+
+/* 4) Base layer: apply body defaults and dark‑mode overrides */
+@layer base {
+  body {
+    background-color: var(--color-beige);
+    color: var(--color-blue-900);
+    font-family: 'Montserrat', sans-serif;
+  }
+  .dark body {
+    background-color: var(--color-blue-950);
+    color: var(--color-beige);
+  }
+
+  /* Headings in Futura */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Futura PT', 'Futura', sans-serif;
+    font-weight: 700;
+  }
+
+  /* Links styling */
+  a {
+    @apply underline hover:no-underline;
+    color: var(--color-blue-900);
+  }
+  .dark a {
+    color: var(--color-beige);
+  }
+
+  /* Smooth scroll */
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* 5) Utility class for explicitly applying Futura elsewhere */
+.font-futura {
+  font-family: 'Futura PT', 'Futura', sans-serif;
+  font-weight: 700;
+}

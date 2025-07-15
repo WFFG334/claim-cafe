@@ -1,0 +1,40 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+// Fetch all posts from the "blog" collection
+const posts = await getCollection('blog');
+
+// Page‑level SEO metadata
+const title = 'Verhalen bij claim.cafe';
+const description = 'Lees herkenbare verhalen en ervaringen van anderen.';
+---
+
+<Layout title={title} description={description}>
+  <section class="mb-12">
+    <h1 class="text-3xl font-futura mb-6">Verhalen</h1>
+    <div class="grid gap-6 sm:grid-cols-2">
+      {posts.map((post) => {
+        // Format date in Dutch locale
+        const date = new Intl.DateTimeFormat('nl-NL', {
+          dateStyle: 'long',
+        }).format(new Date(post.data.pubDate));
+
+        return (
+          <a
+            href={`/blog/${post.slug}`}
+            class="block bg-white rounded-xl shadow-soft p-6 hover:shadow-lg transition"
+          >
+            <h2 class="text-xl font-futura font-bold mb-2 text-blue-900">
+              {post.data.title}
+            </h2>
+            {post.data.description && (
+              <p class="text-gray-600 mb-4">{post.data.description}</p>
+            )}
+            <p class="text-sm text-gray-500">{date}</p>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+</Layout>

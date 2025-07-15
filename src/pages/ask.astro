@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Layout.astro';
+const title = "Stel je vraag | claim.cafe";
+const description = "Vul onderstaand formulier in en een rechtenstudent of jurist helpt je verder.";
+---
+
+<Layout {title} {description}>
+  <section class="mb-12">
+    <h1 class="text-3xl font-futura mb-4">Stel je vraag</h1>
+    <form
+      action="/api/submit"
+      method="post"
+      class="space-y-6 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-soft"
+    >
+      <div>
+        <label class="block text-sm font-medium">Je naam (optioneel)</label>
+        <input name="name" type="text" class="mt-1 block w-full rounded border-gray-300 p-2" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Je e‑mail</label>
+        <input
+          name="email"
+          type="email"
+          required
+          class="mt-1 block w-full rounded border-gray-300 p-2"
+        />
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Jouw vraag</label>
+        <textarea
+          name="question"
+          rows="5"
+          required
+          class="mt-1 block w-full rounded border-gray-300 p-2"
+        ></textarea>
+      </div>
+      <button
+        type="submit"
+        class="bg-orange-500 hover:bg-orange-600 text-white px-5 py-3 rounded-lg shadow"
+      >
+        Verstuur
+      </button>
+    </form>
+    <p class="mt-4 text-sm text-gray-500 dark:text-gray-400">
+      Dit is een eerste check—voor complexe zaken verwijzen we je door.
+    </p>
+  </section>
+</Layout>
