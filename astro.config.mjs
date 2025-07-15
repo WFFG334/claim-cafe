@@ -1,11 +1,10 @@
 import { defineConfig } from 'astro/config';
-import vercel from '@astrojs/vercel/functions'; // or /edge for Edge Functions
-import tailwind from '@tailwindcss/vite';
+import tailwindcss from '@tailwindcss/vite';
 
+// https://astro.build/config
 export default defineConfig({
-  output: 'server',      // ensures SSR mode
-  adapter: vercel(),     // use the Vercel Functions adapter
   vite: {
-    plugins: [tailwind()],
+    plugins: [tailwindcss()],
   },
+  // ...any adapter config you have (Vercel, Netlify, etc.)
 });
