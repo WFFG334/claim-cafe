@@ -1,8 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const title = "Welkom bij claim.cafe";
-const description = "Misschien is het iets. Misschien niet. Geen stress, geen advocaat nodig — gewoon even checken.";
+export const title = "Welkom bij claim.cafe";
+export const description = "Een warm plekje voor je juridische vragen";
 ---
 
 <Layout title={title} description={description}>
@@ -10,15 +10,20 @@ const description = "Misschien is het iets. Misschien niet. Geen stress, geen ad
   <section class="mb-12">
     <h1 class="text-4xl font-bold mb-4">Zit je ergens mee?</h1>
     <p class="text-lg mb-6 max-w-xl">
-      Misschien is het iets. Misschien niet. Laten we er gewoon even naar kijken. 
+      Misschien is het iets. Misschien niet. Laten we er gewoon even naar kijken.
       Geen stress, geen advocaat nodig — gewoon even checken.
     </p>
-
     <div class="flex gap-4 flex-wrap">
-      <a href="https://tally.so/r/yourform" class="bg-orange-500 hover:bg-orange-600 text-white px-5 py-3 rounded-lg shadow">
+      <a
+        href="/ask"
+        class="bg-orange-500 hover:bg-orange-600 text-white px-5 py-3 rounded-lg shadow"
+      >
         Stel je vraag
       </a>
-      <a href="/blog" class="bg-blue-100 hover:bg-blue-200 text-blue-900 px-5 py-3 rounded-lg shadow">
+      <a
+        href="/blog"
+        class="bg-blue-100 hover:bg-blue-200 text-blue-900 px-5 py-3 rounded-lg shadow"
+      >
         Lees de verhalen
       </a>
     </div>
@@ -27,41 +32,76 @@ const description = "Misschien is het iets. Misschien niet. Geen stress, geen ad
   <!-- Blog Preview -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-4">Verhalen van anderen</h2>
-    <ul class="grid grid-cols-1 gap-4">
-      <li class="bg-white p-4 rounded shadow">
-        <h3 class="text-xl font-medium">Ik dacht dat het niks was…</h3>
-        <p class="text-sm text-gray-600">Hoe een kleine twijfel eindigde in een serieus geschil.</p>
+    <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <li class="bg-white p-4 rounded-xl shadow-soft">
+        <h3 class="text-xl font-futura font-bold mb-2 text-blue-900">
+          Ik dacht dat het niks was…
+        </h3>
+        <p class="text-gray-600 mb-4">
+          Hoe een kleine twijfel eindigde in een serieus geschil.
+        </p>
+        <p class="text-sm text-gray-500">
+          1 november 2024
+        </p>
       </li>
-      <li class="bg-white p-4 rounded shadow">
-        <h3 class="text-xl font-medium">Wat begon als hulp werd een conflict</h3>
-        <p class="text-sm text-gray-600">Een goede daad liep uit op onenigheid. Wat dan?</p>
+      <li class="bg-white p-4 rounded-xl shadow-soft">
+        <h3 class="text-xl font-futura font-bold mb-2 text-blue-900">
+          Wat begon als hulp werd een conflict
+        </h3>
+        <p class="text-gray-600 mb-4">
+          Een goede daad liep uit op onenigheid. Wat dan?
+        </p>
+        <p class="text-sm text-gray-500">
+          5 december 2024
+        </p>
       </li>
-      <li class="bg-white p-4 rounded shadow">
-        <h3 class="text-xl font-medium">Mijn huisbaas hield borg in</h3>
-        <p class="text-sm text-gray-600">Wat zijn je rechten als huurder?</p>
+      <li class="bg-white p-4 rounded-xl shadow-soft">
+        <h3 class="text-xl font-futura font-bold mb-2 text-blue-900">
+          Mijn huisbaas hield borg in
+        </h3>
+        <p class="text-gray-600 mb-4">
+          Wat zijn je rechten als huurder?
+        </p>
+        <p class="text-sm text-gray-500">
+          20 januari 2025
+        </p>
       </li>
     </ul>
-    <a href="/blog" class="mt-4 inline-block text-blue-800 underline">Bekijk alle verhalen →</a>
+    <a
+      href="/blog"
+      class="mt-4 inline-block text-blue-800 underline"
+    >
+      Bekijk alle verhalen →
+    </a>
   </section>
 
-  <!-- Hoe het werkt -->
+  <!-- How It Works -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-4">Hoe het werkt</h2>
     <ol class="list-decimal ml-6 space-y-2 text-lg">
-      <li><strong>Stel je vraag:</strong> Gewoon eerlijk en simpel, wij luisteren.</li>
-      <li><strong>Krijg een reactie:</strong> Een student of jonge jurist reageert — snel en menselijk.</li>
-      <li><strong>Eventuele doorverwijzing:</strong> Als het nodig is, helpen we je verder of geven advies.</li>
+      <li>
+        <strong>Stel je vraag:</strong> Gewoon eerlijk en simpel, wij luisteren.
+      </li>
+      <li>
+        <strong>Krijg een reactie:</strong> Een student of jonge jurist reageert — snel en menselijk.
+      </li>
+      <li>
+        <strong>Eventuele doorverwijzing:</strong> Als het nodig is, helpen we je verder of geven advies.
+      </li>
     </ol>
   </section>
 
-  <!-- Voor studenten -->
+  <!-- For Students -->
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-4">Voor studenten</h2>
     <p class="mb-4 max-w-xl">
-      Ben jij 3e of 4e jaars rechtenstudent, en wil je praktijkervaring opdoen? Help échte mensen, 
-      op jouw tempo, en leer van échte vragen.
+      Ben jij 3e of 4e jaars rechtenstudent, en wil je praktijkervaring opdoen? Help
+      échte mensen, op jouw tempo, en leer van échte vragen.
     </p>
-    <a href="mailto:hallo@claim.cafe" class="bg-blue-800 text-white px-5 py-3 rounded-lg shadow">
+    <a
+      href="mailto:hallo@claim.cafe"
+      class="bg-blue-800 text-white px-5 py-3 rounded-lg shadow"
+    >
       Doe mee als student
     </a>
   </section>
